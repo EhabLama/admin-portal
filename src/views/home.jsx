@@ -3,23 +3,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import Content from "../components/content.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
 
 let theme = createTheme({
   palette: {
@@ -204,9 +190,7 @@ export default function Paperbase() {
           >
             <Content />
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
-            <Copyright />
-          </Box>
+          <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}></Box>
         </Box>
       </Box>
     </ThemeProvider>
