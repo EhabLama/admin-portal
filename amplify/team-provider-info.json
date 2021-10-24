@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-socaradminportal-dev-82757-authRole",
+      "UnauthRoleArn": "arn:aws:iam::087146189573:role/amplify-socaradminportal-dev-82757-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::087146189573:role/amplify-socaradminportal-dev-82757-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-socaradminportal-dev-82757-deployment",
+      "UnauthRoleName": "amplify-socaradminportal-dev-82757-unauthRole",
+      "StackName": "amplify-socaradminportal-dev-82757",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:087146189573:stack/amplify-socaradminportal-dev-82757/3eaf4a30-3461-11ec-9cbe-02a58faeed02",
+      "AmplifyAppId": "d1xwnh9u8e9qr1"
+    }
+  }
+}
