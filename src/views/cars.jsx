@@ -155,21 +155,22 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function Home() {
+export default function Paperbase() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
   const { authenticated } = useContext(authContext);
 
+  async function fetchUserInfo() {
+    await Auth.currentUserInfo().then((data) => console.log(data));
+  }
   React.useEffect(() => {
     console.log(authenticated);
     console.log("im home");
-    async function fetchUserInfo() {
-      await Auth.currentUserInfo().then((data) => console.log(data));
-    }
     fetchUserInfo();
   }, []);
 

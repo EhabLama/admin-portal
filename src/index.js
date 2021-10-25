@@ -1,17 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import authContext from "./authContext";
+import PrivateRoutes from "./routes/privateRoutes";
+import PublicRoutes from "./routes/publicRoutes";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+    <React.StrictMode>
+      <authContext.Provider value={{ authenticated, setAuthenticated }}>
+        {authenticated ? <PrivateRoutes /> : <PublicRoutes />}
+      </authContext.Provider>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,24 +1,37 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { Auth } from "aws-amplify";
+import { useContext } from "react";
+import authContext from "../authContext";
+import { Redirect } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import HelpIcon from "@mui/icons-material/Help";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 function Header(props) {
+  const { setAuthenticated } = useContext(authContext);
   const { onDrawerToggle } = props;
+
+  async function authSignOut() {
+    await Auth.signOut();
+    setAuthenticated(false);
+  }
+
+  const signOut = (e) => {
+    e.preventDefault();
+    authSignOut();
+    <Redirect to="/login" />;
+  };
 
   return (
     <React.Fragment>
@@ -36,29 +49,11 @@ function Header(props) {
               </IconButton>
             </Grid>
             <Grid item xs />
+            <Grid item></Grid>
             <Grid item>
-              <Link
-                href="/"
-                variant="body2"
-                sx={{
-                  textDecoration: "none",
-                  color: lightColor,
-                  "&:hover": {
-                    color: "common.white",
-                  },
-                }}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Go to docs
-              </Link>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Alerts • No alerts">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
+              <IconButton color="inherit" sx={{ p: 0.5 }} onClick={signOut}>
+                <LogoutIcon></LogoutIcon>
+              </IconButton>
             </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
@@ -89,15 +84,8 @@ function Header(props) {
                 color="inherit"
                 size="small"
               >
-                Web setup
+                Welcome!, {props.username}
               </Button>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Help">
-                <IconButton color="inherit">
-                  <HelpIcon />
-                </IconButton>
-              </Tooltip>
             </Grid>
           </Grid>
         </Toolbar>
