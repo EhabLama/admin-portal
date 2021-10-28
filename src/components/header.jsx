@@ -73,9 +73,11 @@ function Header(props) {
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
-                Authentication
-              </Typography>
+              <Typography
+                color="inherit"
+                variant="h5"
+                component="h1"
+              ></Typography>
             </Grid>
             <Grid item>
               <Button
@@ -84,7 +86,7 @@ function Header(props) {
                 color="inherit"
                 size="small"
               >
-                Welcome!, {props.username}
+                Welcome!,
               </Button>
             </Grid>
           </Grid>
@@ -97,10 +99,8 @@ function Header(props) {
         sx={{ zIndex: 0 }}
       >
         <Tabs value={0} textColor="inherit">
-          <Tab label="Users" />
-          <Tab label="Sign-in method" />
-          <Tab label="Templates" />
-          <Tab label="Usage" />
+          <Tab label={props.label1} />
+          <Tab label={props.label2} />
         </Tabs>
       </AppBar>
     </React.Fragment>

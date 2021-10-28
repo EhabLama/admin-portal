@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Content from "../components/content.jsx";
+import Content from "../components/content/content.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
 import { Auth } from "aws-amplify";

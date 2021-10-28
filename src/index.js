@@ -3,16 +3,15 @@ import ReactDOM from "react-dom";
 import authContext from "./authContext";
 import PrivateRoutes from "./routes/privateRoutes";
 import PublicRoutes from "./routes/publicRoutes";
+import "./index.css";
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
 
   return (
-    <React.StrictMode>
-      <authContext.Provider value={{ authenticated, setAuthenticated }}>
-        {authenticated ? <PrivateRoutes /> : <PublicRoutes />}
-      </authContext.Provider>
-    </React.StrictMode>
+    <authContext.Provider value={{ authenticated, setAuthenticated }}>
+      {authenticated ? <PrivateRoutes /> : <PublicRoutes />}
+    </authContext.Provider>
   );
 };
 

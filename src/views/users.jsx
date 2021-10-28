@@ -1,12 +1,12 @@
-import * as React from "react";
+import React, { UseState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Content from "../components/content.jsx";
+import { useMediaQuery } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import { Box } from "@mui/material";
+import Content from "../components/content/userContent.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import { useContext } from "react";
 import authContext from "../authContext";
 
@@ -45,6 +45,10 @@ let theme = createTheme({
 theme = {
   ...theme,
   components: {
+    "& .MuiIconButton-root": {
+      padding: 0,
+      backgroundColor: "000000",
+    },
     MuiDrawer: {
       styleOverrides: {
         paper: {
@@ -55,6 +59,7 @@ theme = {
     MuiButton: {
       styleOverrides: {
         root: {
+          color: "#fff",
           textTransform: "none",
         },
         contained: {
@@ -163,17 +168,6 @@ export default function Paperbase() {
     setMobileOpen(!mobileOpen);
   };
 
-  const { authenticated } = useContext(authContext);
-
-  async function fetchUserInfo() {
-    await Auth.currentUserInfo().then((data) => console.log(data));
-  }
-  React.useEffect(() => {
-    console.log(authenticated);
-    console.log("im home");
-    fetchUserInfo();
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -199,7 +193,8 @@ export default function Paperbase() {
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <Header
             onDrawerToggle={handleDrawerToggle}
-            // username={userData.username}
+            label1="Users"
+            label2=""
           />
           <Box
             component="main"

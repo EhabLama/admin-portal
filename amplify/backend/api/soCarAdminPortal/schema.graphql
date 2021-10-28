@@ -1,0 +1,26 @@
+type Listing @model @auth(rules: [{allow: public}]) @key(name: "byUsers", fields: ["usersID"]) {
+  id: ID!
+  usersID: ID
+  listingtocar: Cars @connection
+}
+
+type Cars @model @auth(rules: [{allow: public}]) @key(name: "byUsers", fields: ["usersID"]) {
+  id: ID!
+  brand: String
+  build: String
+  year: String
+  color: String
+  usersID: ID
+  cartolisting: Listing @connection
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  password: String!
+  role: String!
+  tag: String
+  usertocars: [Cars] @connection(keyName: "byUsers", fields: ["id"])
+  usertolistings: [Listing] @connection(keyName: "byUsers", fields: ["id"])
+}
+ 

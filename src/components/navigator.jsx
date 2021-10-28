@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { Divider } from "@mui/material";
+import { Drawer } from "@mui/material";
+import { List } from "@mui/material";
+import { Box } from "@mui/material";
+import { ListItem } from "@mui/material";
+import { ListItemButton } from "@mui/material";
+import { ListItemIcon } from "@mui/material";
+import { ListItemText } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
@@ -24,9 +24,19 @@ const categories = [
         active: false,
         link: "/users",
       },
-      { id: "Listings", icon: <DnsRoundedIcon />, link: "/listings" },
-      { id: "Cars", icon: <CarRental />, link: "/cars" },
-      { id: "Settings", icon: <SettingsIcon />, link: "/settings" },
+      {
+        id: "Listings",
+        icon: <DnsRoundedIcon />,
+        link: "/listings",
+        active: false,
+      },
+      { id: "Cars", icon: <CarRental />, link: "/cars", active: false },
+      {
+        id: "Settings",
+        icon: <SettingsIcon />,
+        link: "/settings",
+        active: false,
+      },
     ],
   },
 ];

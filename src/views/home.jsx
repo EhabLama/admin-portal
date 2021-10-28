@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Content from "../components/content.jsx";
+import Content from "../components/content/content.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
 import { Auth } from "aws-amplify";
@@ -166,7 +166,6 @@ export default function Home() {
 
   React.useEffect(() => {
     console.log(authenticated);
-    console.log("im home");
     async function fetchUserInfo() {
       await Auth.currentUserInfo().then((data) => console.log(data));
     }
@@ -187,6 +186,7 @@ export default function Home() {
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
+              select={true}
             />
           )}
 
@@ -196,10 +196,7 @@ export default function Home() {
           />
         </Box>
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Header
-            onDrawerToggle={handleDrawerToggle}
-            // username={userData.username}
-          />
+          <Header onDrawerToggle={handleDrawerToggle} />
           <Box
             component="main"
             sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
