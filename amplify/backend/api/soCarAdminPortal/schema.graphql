@@ -1,26 +1,28 @@
-type Listing @model @auth(rules: [{allow: public}]) @key(name: "byUsers", fields: ["usersID"]) {
+type Listing @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  usersID: ID
-  listingtocar: Cars @connection
+  start_at: AWSDate
+  end_at: AWSDate
+  day_price: String
+  is_featured: Boolean
+  geolocation: AWSURL
+  userID: ID
 }
 
-type Cars @model @auth(rules: [{allow: public}]) @key(name: "byUsers", fields: ["usersID"]) {
+type Car @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   brand: String
-  build: String
+  model: String
   year: String
   color: String
-  usersID: ID
-  cartolisting: Listing @connection
+  listed: Boolean
+  car_image: AWSURL
+  userID: ID
 }
 
-type Users @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
-  username: String!
-  password: String!
-  role: String!
-  tag: String
-  usertocars: [Cars] @connection(keyName: "byUsers", fields: ["id"])
-  usertolistings: [Listing] @connection(keyName: "byUsers", fields: ["id"])
+  username: String
+  Cars: [Car] @connection(keyName: "byUser", fields: ["id"])
+  Listings: [Listing] @connection(keyName: "byUser", fields: ["id"])
 }
  
