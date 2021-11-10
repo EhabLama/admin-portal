@@ -1,104 +1,86 @@
 {
-    "hosting": {
-        "amplifyhosting": {
-            "service": "amplifyhosting",
-            "type": "cicd"
-        }
-    },
-    "auth": {
-        "soCarAdminPortal": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [],
-            "customAuth": false,
-            "frontendAuthConfig": {
-                "loginMechanisms": [
-                    "PREFERRED_USERNAME"
-                ],
-                "signupAttributes": [
-                    "PREFERRED_USERNAME"
-                ],
-                "passwordProtectionSettings": {
-                    "passwordPolicyMinLength": 8,
-                    "passwordPolicyCharacters": [
-                        "REQUIRES_LOWERCASE",
-                        "REQUIRES_NUMBERS"
-                    ]
-                },
-                "mfaConfiguration": "OFF",
-                "mfaTypes": [
-                    "SMS"
-                ],
-                "verificationMechanisms": [
-                    "EMAIL"
-                ]
-            }
-        }
-    },
-    "api": {
-        "soCarAdminPortal": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "defaultAuthentication": {
-                        "authenticationType": "API_KEY",
-                        "apiKeyConfig": {
-                            "apiKeyExpirationDays": 365,
-                            "description": "adminPortalAPIKey"
-                        }
-                    },
-                    "additionalAuthenticationProviders": [
-                        {
-                            "authenticationType": "AWS_IAM"
-                        },
-                        {
-                            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-                            "userPoolConfig": {
-                                "userPoolId": "authsoCarAdminPortal"
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        "AdminQueries": {
-            "service": "API Gateway",
-            "providerPlugin": "awscloudformation",
-            "authorizationType": "AMAZON_COGNITO_USER_POOLS",
-            "dependsOn": [
-                {
-                    "category": "auth",
-                    "resourceName": "soCarAdminPortal",
-                    "attributes": [
-                        "UserPoolId"
-                    ]
-                },
-                {
-                    "category": "function",
-                    "resourceName": "AdminQueriesd52f1724",
-                    "attributes": [
-                        "Arn",
-                        "Name"
-                    ]
-                }
-            ]
-        }
-    },
-    "function": {
-        "AdminQueriesd52f1724": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true,
-            "dependsOn": [
-                {
-                    "category": "auth",
-                    "resourceName": "soCarAdminPortal",
-                    "attributes": [
-                        "UserPoolId"
-                    ]
-                }
-            ]
-        }
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd"
     }
+  },
+  "auth": {
+    "soCarAdminPortal": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": ["PREFERRED_USERNAME"],
+        "signupAttributes": ["PREFERRED_USERNAME"],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": ["REQUIRES_LOWERCASE", "REQUIRES_NUMBERS"]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": ["SMS"],
+        "verificationMechanisms": ["EMAIL"]
+      }
+    }
+  },
+  "api": {
+    "soCarAdminPortal": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "adminPortalAPIKey"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authsoCarAdminPortal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "AdminQueries": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "soCarAdminPortal",
+          "attributes": ["UserPoolId"]
+        },
+        {
+          "category": "function",
+          "resourceName": "AdminQueriesd52f1724",
+          "attributes": ["Arn", "Name"]
+        }
+      ]
+    }
+  },
+  "function": {
+    "AdminQueriesd52f1724": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "soCarAdminPortal",
+          "attributes": ["UserPoolId"]
+        }
+      ]
+    }
+  }
 }
