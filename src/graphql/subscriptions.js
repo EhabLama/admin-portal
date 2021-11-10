@@ -5,25 +5,17 @@ export const onCreateListing = /* GraphQL */ `
   subscription OnCreateListing {
     onCreateListing {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -31,25 +23,17 @@ export const onUpdateListing = /* GraphQL */ `
   subscription OnUpdateListing {
     onUpdateListing {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -57,172 +41,134 @@ export const onDeleteListing = /* GraphQL */ `
   subscription OnDeleteListing {
     onDeleteListing {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const onCreateCars = /* GraphQL */ `
-  subscription OnCreateCars {
-    onCreateCars {
+export const onCreateCar = /* GraphQL */ `
+  subscription OnCreateCar {
+    onCreateCar {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const onUpdateCars = /* GraphQL */ `
-  subscription OnUpdateCars {
-    onUpdateCars {
+export const onUpdateCar = /* GraphQL */ `
+  subscription OnUpdateCar {
+    onUpdateCar {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const onDeleteCars = /* GraphQL */ `
-  subscription OnDeleteCars {
-    onDeleteCars {
+export const onDeleteCar = /* GraphQL */ `
+  subscription OnDeleteCar {
+    onDeleteCar {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const onCreateUsers = /* GraphQL */ `
-  subscription OnCreateUsers {
-    onCreateUsers {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }
     }
   }
 `;
-export const onUpdateUsers = /* GraphQL */ `
-  subscription OnUpdateUsers {
-    onUpdateUsers {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }
     }
   }
 `;
-export const onDeleteUsers = /* GraphQL */ `
-  subscription OnDeleteUsers {
-    onDeleteUsers {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }

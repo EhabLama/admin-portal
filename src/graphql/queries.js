@@ -5,25 +5,17 @@ export const getListing = /* GraphQL */ `
   query GetListing($id: ID!) {
     getListing(id: $id) {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -36,7 +28,12 @@ export const listListings = /* GraphQL */ `
     listListings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        usersID
+        start_at
+        end_at
+        day_price
+        is_featured
+        geolocation
+        userID
         _version
         _deleted
         _lastChangedAt
@@ -63,7 +60,12 @@ export const syncListings = /* GraphQL */ `
     ) {
       items {
         id
-        usersID
+        start_at
+        end_at
+        day_price
+        is_featured
+        geolocation
+        userID
         _version
         _deleted
         _lastChangedAt
@@ -75,46 +77,41 @@ export const syncListings = /* GraphQL */ `
     }
   }
 `;
-export const getCars = /* GraphQL */ `
-  query GetCars($id: ID!) {
-    getCars(id: $id) {
+export const getCar = /* GraphQL */ `
+  query GetCar($id: ID!) {
+    getCar(id: $id) {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const listCarss = /* GraphQL */ `
-  query ListCarss(
-    $filter: ModelCarsFilterInput
+export const listCars = /* GraphQL */ `
+  query ListCars(
+    $filter: ModelCarFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listCarss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         brand
-        build
+        model
         year
         color
-        usersID
+        listed
+        car_image
+        userID
         _version
         _deleted
         _lastChangedAt
@@ -128,7 +125,7 @@ export const listCarss = /* GraphQL */ `
 `;
 export const syncCars = /* GraphQL */ `
   query SyncCars(
-    $filter: ModelCarsFilterInput
+    $filter: ModelCarFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
@@ -142,10 +139,12 @@ export const syncCars = /* GraphQL */ `
       items {
         id
         brand
-        build
+        model
         year
         color
-        usersID
+        listed
+        car_image
+        userID
         _version
         _deleted
         _lastChangedAt
@@ -157,43 +156,37 @@ export const syncCars = /* GraphQL */ `
     }
   }
 `;
-export const getUsers = /* GraphQL */ `
-  query GetUsers($id: ID!) {
-    getUsers(id: $id) {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }
     }
   }
 `;
-export const listUserss = /* GraphQL */ `
-  query ListUserss(
-    $filter: ModelUsersFilterInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         username
-        password
-        role
-        tag
         _version
         _deleted
         _lastChangedAt
@@ -207,7 +200,7 @@ export const listUserss = /* GraphQL */ `
 `;
 export const syncUsers = /* GraphQL */ `
   query SyncUsers(
-    $filter: ModelUsersFilterInput
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
@@ -221,9 +214,6 @@ export const syncUsers = /* GraphQL */ `
       items {
         id
         username
-        password
-        role
-        tag
         _version
         _deleted
         _lastChangedAt

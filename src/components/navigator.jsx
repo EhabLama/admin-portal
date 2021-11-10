@@ -16,7 +16,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 const categories = [
   {
-    id: "Build",
+    id: "Actions",
     children: [
       {
         id: "Users",
@@ -68,10 +68,12 @@ export default function Navigator(props) {
           Admin Portal
         </ListItem>
         <ListItem sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
+          <ListItemButton component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItemButton>
         </ListItem>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: "#101F33" }}>

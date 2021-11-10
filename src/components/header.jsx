@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Auth } from "aws-amplify";
 import { useContext } from "react";
-import authContext from "../authContext";
+import authContext from "../context/authContext";
 import { Redirect } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
@@ -86,7 +86,7 @@ function Header(props) {
                 color="inherit"
                 size="small"
               >
-                Welcome!,
+                {props.username}
               </Button>
             </Grid>
           </Grid>

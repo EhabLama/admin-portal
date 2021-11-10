@@ -24,7 +24,7 @@
       "function": {
         "AdminQueriesd52f1724": {
           "deploymentBucketName": "amplify-socaradminportal-dev-82757-deployment",
-          "s3Key": "amplify-builds/AdminQueriesd52f1724-496b3164554c4d773133-build.zip"
+          "s3Key": "amplify-builds/AdminQueriesd52f1724-45472b33566d344c3168-build.zip"
         }
       }
     }

@@ -8,48 +8,50 @@ type ListingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type CarsMetaData = {
+type CarMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UsersMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 export declare class Listing {
   readonly id: string;
-  readonly usersID?: string;
-  readonly listingtocar?: Cars;
+  readonly start_at?: string;
+  readonly end_at?: string;
+  readonly day_price?: string;
+  readonly is_featured?: boolean;
+  readonly geolocation?: string;
+  readonly userID?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Listing, ListingMetaData>);
   static copyOf(source: Listing, mutator: (draft: MutableModel<Listing, ListingMetaData>) => MutableModel<Listing, ListingMetaData> | void): Listing;
 }
 
-export declare class Cars {
+export declare class Car {
   readonly id: string;
   readonly brand?: string;
-  readonly build?: string;
+  readonly model?: string;
   readonly year?: string;
   readonly color?: string;
-  readonly usersID?: string;
-  readonly cartolisting?: Listing;
+  readonly listed?: boolean;
+  readonly car_image?: string;
+  readonly userID?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Cars, CarsMetaData>);
-  static copyOf(source: Cars, mutator: (draft: MutableModel<Cars, CarsMetaData>) => MutableModel<Cars, CarsMetaData> | void): Cars;
+  constructor(init: ModelInit<Car, CarMetaData>);
+  static copyOf(source: Car, mutator: (draft: MutableModel<Car, CarMetaData>) => MutableModel<Car, CarMetaData> | void): Car;
 }
 
-export declare class Users {
+export declare class User {
   readonly id: string;
-  readonly username: string;
-  readonly password: string;
-  readonly role: string;
-  readonly tag?: string;
-  readonly usertocars?: (Cars | null)[];
-  readonly usertolistings?: (Listing | null)[];
+  readonly username?: string;
+  readonly Cars?: (Car | null)[];
+  readonly Listings?: (Listing | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Users, UsersMetaData>);
-  static copyOf(source: Users, mutator: (draft: MutableModel<Users, UsersMetaData>) => MutableModel<Users, UsersMetaData> | void): Users;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }

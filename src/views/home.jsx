@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,9 +6,7 @@ import Box from "@mui/material/Box";
 import Content from "../components/content/content.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
-import { Auth } from "aws-amplify";
-import { useContext } from "react";
-import authContext from "../authContext";
+import userContext from "../context/userContext";
 
 let theme = createTheme({
   palette: {
@@ -156,21 +154,13 @@ theme = {
 const drawerWidth = 256;
 
 export default function Home() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const { userInfo } = useContext(userContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { authenticated } = useContext(authContext);
-
-  React.useEffect(() => {
-    console.log(authenticated);
-    async function fetchUserInfo() {
-      await Auth.currentUserInfo().then((data) => console.log(data));
-    }
-    fetchUserInfo();
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -196,12 +186,12 @@ export default function Home() {
           />
         </Box>
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
+          <Header onDrawerToggle={handleDrawerToggle} username={userInfo} />
           <Box
             component="main"
             sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
           >
-            <Content />
+            <Content username={userInfo} />
           </Box>
           <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}></Box>
         </Box>

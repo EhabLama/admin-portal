@@ -1,17 +1,8 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import RefreshIcon from "@mui/icons-material/Refresh";
 
-export default function Content() {
+export default function Content(props) {
   return (
     <Paper sx={{ maxWidth: 936, margin: "auto", overflow: "hidden" }}>
       <AppBar
@@ -19,38 +10,24 @@ export default function Content() {
         color="default"
         elevation={0}
         sx={{ borderBottom: "1px solid rgba(0, 0, 0, 0.12)" }}
+      ></AppBar>
+      <Typography
+        sx={{ my: 5, mx: 2 }}
+        color="text.primary"
+        align="center"
+        style={{ whitespace: "pre-wrap" }}
+        variant="h5"
       >
-        <Toolbar>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <SearchIcon color="inherit" sx={{ display: "block" }} />
-            </Grid>
-            <Grid item xs>
-              <TextField
-                fullWidth
-                placeholder="Search by email address, phone number, or user UID"
-                InputProps={{
-                  disableUnderline: true,
-                  sx: { fontSize: "default" },
-                }}
-                variant="standard"
-              />
-            </Grid>
-            <Grid item>
-              <Button variant="contained" sx={{ mr: 1 }}>
-                Add user
-              </Button>
-              <Tooltip title="Reload">
-                <IconButton>
-                  <RefreshIcon color="inherit" sx={{ display: "block" }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
-        No users for this project yet
+        Welcome {props.username}!, this is an admin portal.
+        <Typography color="text.secondary">
+          Enter the Users tab to manage users.
+        </Typography>
+        <Typography color="text.secondary">
+          Enter the Cars tab to view cars owned by business users.
+        </Typography>
+        <Typography color="text.secondary">
+          Enter the Listings tab to view car listings by business users.
+        </Typography>
       </Typography>
     </Paper>
   );

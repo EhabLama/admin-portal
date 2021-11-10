@@ -8,25 +8,17 @@ export const createListing = /* GraphQL */ `
   ) {
     createListing(input: $input, condition: $condition) {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -37,25 +29,17 @@ export const updateListing = /* GraphQL */ `
   ) {
     updateListing(input: $input, condition: $condition) {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -66,190 +50,152 @@ export const deleteListing = /* GraphQL */ `
   ) {
     deleteListing(input: $input, condition: $condition) {
       id
-      usersID
+      start_at
+      end_at
+      day_price
+      is_featured
+      geolocation
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      listingtocar {
-        id
-        brand
-        build
-        year
-        color
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const createCars = /* GraphQL */ `
-  mutation CreateCars(
-    $input: CreateCarsInput!
-    $condition: ModelCarsConditionInput
+export const createCar = /* GraphQL */ `
+  mutation CreateCar(
+    $input: CreateCarInput!
+    $condition: ModelCarConditionInput
   ) {
-    createCars(input: $input, condition: $condition) {
+    createCar(input: $input, condition: $condition) {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const updateCars = /* GraphQL */ `
-  mutation UpdateCars(
-    $input: UpdateCarsInput!
-    $condition: ModelCarsConditionInput
+export const updateCar = /* GraphQL */ `
+  mutation UpdateCar(
+    $input: UpdateCarInput!
+    $condition: ModelCarConditionInput
   ) {
-    updateCars(input: $input, condition: $condition) {
+    updateCar(input: $input, condition: $condition) {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const deleteCars = /* GraphQL */ `
-  mutation DeleteCars(
-    $input: DeleteCarsInput!
-    $condition: ModelCarsConditionInput
+export const deleteCar = /* GraphQL */ `
+  mutation DeleteCar(
+    $input: DeleteCarInput!
+    $condition: ModelCarConditionInput
   ) {
-    deleteCars(input: $input, condition: $condition) {
+    deleteCar(input: $input, condition: $condition) {
       id
       brand
-      build
+      model
       year
       color
-      usersID
+      listed
+      car_image
+      userID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      cartolisting {
-        id
-        usersID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const createUsers = /* GraphQL */ `
-  mutation CreateUsers(
-    $input: CreateUsersInput!
-    $condition: ModelUsersConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createUsers(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }
     }
   }
 `;
-export const updateUsers = /* GraphQL */ `
-  mutation UpdateUsers(
-    $input: UpdateUsersInput!
-    $condition: ModelUsersConditionInput
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    updateUsers(input: $input, condition: $condition) {
+    updateUser(input: $input, condition: $condition) {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }
     }
   }
 `;
-export const deleteUsers = /* GraphQL */ `
-  mutation DeleteUsers(
-    $input: DeleteUsersInput!
-    $condition: ModelUsersConditionInput
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    deleteUsers(input: $input, condition: $condition) {
+    deleteUser(input: $input, condition: $condition) {
       id
       username
-      password
-      role
-      tag
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      usertolistings {
+      Listings {
         nextToken
         startedAt
       }
-      usertocars {
+      Cars {
         nextToken
         startedAt
       }

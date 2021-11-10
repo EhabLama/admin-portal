@@ -1,4 +1,4 @@
-import React, { UseState } from "react";
+import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import { CssBaseline } from "@mui/material";
@@ -6,9 +6,8 @@ import { Box } from "@mui/material";
 import Content from "../components/content/userContent.jsx";
 import Navigator from "../components/navigator.jsx";
 import Header from "../components/header.jsx";
-import { Auth, API } from "aws-amplify";
 import { useContext } from "react";
-import authContext from "../authContext";
+import userContext from "../context/userContext";
 
 let theme = createTheme({
   palette: {
@@ -163,6 +162,7 @@ const drawerWidth = 256;
 export default function Paperbase() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const { userInfo } = useContext(userContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -194,7 +194,7 @@ export default function Paperbase() {
           <Header
             onDrawerToggle={handleDrawerToggle}
             label1="Users"
-            label2=""
+            username={userInfo}
           />
           <Box
             component="main"

@@ -10,25 +10,47 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "usersID": {
-                    "name": "usersID",
+                "start_at": {
+                    "name": "start_at",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "end_at": {
+                    "name": "end_at",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "day_price": {
+                    "name": "day_price",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "is_featured": {
+                    "name": "is_featured",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "geolocation": {
+                    "name": "geolocation",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "listingtocar": {
-                    "name": "listingtocar",
-                    "isArray": false,
-                    "type": {
-                        "model": "Cars"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "listingListingtocarId"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -57,9 +79,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUsers",
+                        "name": "byUser",
                         "fields": [
-                            "usersID"
+                            "userID"
                         ]
                     }
                 },
@@ -81,8 +103,8 @@ export const schema = {
                 }
             ]
         },
-        "Cars": {
-            "name": "Cars",
+        "Car": {
+            "name": "Car",
             "fields": {
                 "id": {
                     "name": "id",
@@ -98,8 +120,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "build": {
-                    "name": "build",
+                "model": {
+                    "name": "model",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -119,25 +141,26 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "usersID": {
-                    "name": "usersID",
+                "listed": {
+                    "name": "listed",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "car_image": {
+                    "name": "car_image",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "cartolisting": {
-                    "name": "cartolisting",
-                    "isArray": false,
-                    "type": {
-                        "model": "Listing"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "carsCartolistingId"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -166,9 +189,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUsers",
+                        "name": "byUser",
                         "fields": [
-                            "usersID"
+                            "userID"
                         ]
                     }
                 },
@@ -190,8 +213,8 @@ export const schema = {
                 }
             ]
         },
-        "Users": {
-            "name": "Users",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -204,46 +227,25 @@ export const schema = {
                     "name": "username",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "password": {
-                    "name": "password",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "role": {
-                    "name": "role",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "tag": {
-                    "name": "tag",
-                    "isArray": false,
-                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "usertocars": {
-                    "name": "usertocars",
+                "Cars": {
+                    "name": "Cars",
                     "isArray": true,
                     "type": {
-                        "model": "Cars"
+                        "model": "Car"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "usersID"
+                        "associatedWith": "userID"
                     }
                 },
-                "usertolistings": {
-                    "name": "usertolistings",
+                "Listings": {
+                    "name": "Listings",
                     "isArray": true,
                     "type": {
                         "model": "Listing"
@@ -253,7 +255,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "usersID"
+                        "associatedWith": "userID"
                     }
                 },
                 "createdAt": {
@@ -301,5 +303,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c6c339cc0ece722a659ab725793485a8"
+    "version": "a934c8c040dd92509469fd7d665a1492"
 };
