@@ -8,6 +8,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.0.4",
+    "@mui/styles": "^5.1.0",
     "@mui/x-data-grid": "5.0.0-beta.2",
     "aws-amplify": "^4.3.3",
     "focus-trap-react": "^8.8.2",
