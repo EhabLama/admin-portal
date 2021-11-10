@@ -12,10 +12,77 @@
  * and limitations under the License.
  */
 
-const { CognitoIdentityServiceProvider } = require('aws-sdk');
+const {
+  CognitoIdentityServiceProvider
+} = require('aws-sdk');
 
 const cognitoIdentityServiceProvider = new CognitoIdentityServiceProvider();
 const userPoolId = process.env.USERPOOL;
+
+
+
+async function adminCreateUser(username, password, userAttributes) {
+  const params = {
+    UserPoolId: userPoolId,
+    Username: username,
+    TemporaryPassword: password,
+    UserAttributes: userAttributes
+  };
+
+  console.log(`Attempting to create user ${username}`);
+
+  try {
+    const result = await cognitoIdentityServiceProvider
+      .adminCreateUser(params)
+      .promise();
+
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+
+async function adminUpdateUser(username, userAttributes) {
+  const params = {
+    UserPoolId: userPoolId,
+    Username: username,
+    UserAttributes: userAttributes,
+  };
+
+  console.log(`Attempting to update user ${username}`);
+
+  try {
+    const result = await cognitoIdentityServiceProvider
+      .adminUpdateUserAttributes(params)
+      .promise();
+
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+
+async function adminDeleteUser(username) {
+  var params = {
+    UserPoolId: userPoolId,
+    Username: username,
+  };
+
+  try {
+    const result = await cognitoIdentityServiceProvider.adminDeleteUser(params).promise();
+    console.log(`Success deleting user`);
+    return {
+      message: `Success deleting user`,
+    };
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
 
 async function addUserToGroup(username, groupname) {
   const params = {
@@ -134,8 +201,12 @@ async function getUser(username) {
 async function listUsers(Limit, PaginationToken) {
   const params = {
     UserPoolId: userPoolId,
-    ...(Limit && { Limit }),
-    ...(PaginationToken && { PaginationToken }),
+    ...(Limit && {
+      Limit
+    }),
+    ...(PaginationToken && {
+      PaginationToken
+    }),
   };
 
   console.log('Attempting to list users');
@@ -157,8 +228,12 @@ async function listUsers(Limit, PaginationToken) {
 async function listGroups(Limit, PaginationToken) {
   const params = {
     UserPoolId: userPoolId,
-    ...(Limit && { Limit }),
-    ...(PaginationToken && { PaginationToken }),
+    ...(Limit && {
+      Limit
+    }),
+    ...(PaginationToken && {
+      PaginationToken
+    }),
   };
 
   console.log('Attempting to list groups');
@@ -181,8 +256,12 @@ async function listGroupsForUser(username, Limit, NextToken) {
   const params = {
     UserPoolId: userPoolId,
     Username: username,
-    ...(Limit && { Limit }),
-    ...(NextToken && { NextToken }),
+    ...(Limit && {
+      Limit
+    }),
+    ...(NextToken && {
+      NextToken
+    }),
   };
 
   console.log(`Attempting to list groups for ${username}`);
@@ -208,8 +287,12 @@ async function listUsersInGroup(groupname, Limit, NextToken) {
   const params = {
     GroupName: groupname,
     UserPoolId: userPoolId,
-    ...(Limit && { Limit }),
-    ...(NextToken && { NextToken }),
+    ...(Limit && {
+      Limit
+    }),
+    ...(NextToken && {
+      NextToken
+    }),
   };
 
   console.log(`Attempting to list users in group ${groupname}`);
@@ -245,6 +328,9 @@ async function signUserOut(username) {
 }
 
 module.exports = {
+  adminDeleteUser,
+  adminCreateUser,
+  adminUpdateUser,
   addUserToGroup,
   removeUserFromGroup,
   confirmUserSignUp,

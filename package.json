@@ -2,6 +2,7 @@
   "name": "socar-admin-portal",
   "version": "0.1.0",
   "private": true,
+  "main": "/src/index.js",
   "dependencies": {
     "@aws-amplify/datastore": "^3.5.1",
     "@aws-amplify/ui-react": "^1.2.21",

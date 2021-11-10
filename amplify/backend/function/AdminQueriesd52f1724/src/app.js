@@ -16,6 +16,9 @@ const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 
 const {
+  adminCreateUser,
+  adminUpdateUser,
+  adminDeleteUser,
   addUserToGroup,
   removeUserFromGroup,
   confirmUserSignUp,
@@ -31,20 +34,27 @@ const {
 
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
-app.use((req, res, next) => {
+app.use(function (request, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
+  res.header('Access-Control-Allow-Headers', '*');
+  //intercept the OPTIONS call so we don't double up on calls to the integration
+  if ('OPTIONS' === request.method) {
+    res.send(200);
+  } else {
+    next();
+  }
 });
 
 // Only perform tasks if the user is in a specific group
 const allowedGroup = process.env.GROUP;
 
-const checkGroup = function(req, res, next) {
+const checkGroup = function (req, res, next) {
   if (req.path == '/signUserOut') {
     return next();
   }
@@ -69,6 +79,66 @@ const checkGroup = function(req, res, next) {
 };
 
 app.all('*', checkGroup);
+
+app.post('/adminCreateUser', async (req, res, next) => {
+  if (!req.body.username) {
+    const err = new Error('username is required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const response = await adminCreateUser(
+      req.body.username,
+      req.body.password,
+      req.body.userAttributes
+    );
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+app.post('/adminUpdateUser', async (req, res, next) => {
+  if (!req.body.username) {
+    const err = new Error('username is required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (!req.body.userAttributes) {
+    const err = new Error('userAttributes is required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const response = await adminUpdateUser(
+      req.body.username,
+      req.body.userAttributes
+    );
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/adminDeleteUser', async (req, res, next) => {
+  if (!req.body.username) {
+    const err = new Error('username is required');
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const response = await adminDeleteUser(req.body.username);
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+
+});
 
 app.post('/addUserToGroup', async (req, res, next) => {
   if (!req.body.username || !req.body.groupname) {
@@ -266,7 +336,9 @@ app.use((err, req, res, next) => {
   if (!err.statusCode) err.statusCode = 500; // If err has no specified error code, set error code to 'Internal Server Error (500)'
   res
     .status(err.statusCode)
-    .json({ message: err.message })
+    .json({
+      message: err.message
+    })
     .end();
 });
 

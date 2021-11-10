@@ -163,6 +163,9 @@
             {
               "Effect": "Allow",
               "Action": [
+                "cognito-idp:AdminCreateUser",
+                "cognito-idp:AdminUpdateUserAttributes",
+                "cognito-idp:AdminDeleteUser",
                 "cognito-idp:ListUsersInGroup",
                 "cognito-idp:AdminUserGlobalSignOut",
                 "cognito-idp:AdminEnableUser",
