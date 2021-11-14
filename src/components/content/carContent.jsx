@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Paper,
+  Grid,
+  Button,
+  TextField,
+  Tooltip,
+  IconButton,
+  Box,
+  CircularProgress,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+import SearchIcon from "@mui/icons-material/Search";
 import awsconfig from "../../aws-exports";
 import { Amplify, API } from "aws-amplify";
 import { listUsers, listCars } from "../../graphql/queries";

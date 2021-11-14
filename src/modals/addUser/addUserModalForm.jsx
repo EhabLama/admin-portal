@@ -36,7 +36,7 @@ export const Form = ({ onSubmit }) => {
         <input
           className="form-control"
           id="groupname"
-          placeholder="Admins, Product_users or Business_users"
+          placeholder="Admins, Product_Users or Business_Users"
         />
       </div>
 
