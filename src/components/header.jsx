@@ -4,17 +4,19 @@ import { Auth } from "aws-amplify";
 import { useContext } from "react";
 import authContext from "../context/authContext";
 import { Redirect } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  Grid,
+  IconButton,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
