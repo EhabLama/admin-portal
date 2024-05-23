@@ -1,4 +1,4 @@
-# Admin portal sample test
+# Admin portal Project
 
 This project was made using React and MaterialUI for the frontend, whilst utilising Amplify and Node.js for the backend.
 
